@@ -6,7 +6,7 @@ export PYTHONFAULTHANDLER=1
 pythonExec=$1
 
 # Go to the folder you want to run your programs in
-cd /raid/shadab/prateek/cvpr_code
+#cd /raid/shadab/prateek/cvpr_code
 
 # # # # # # #Possible sampling functions
 # # # # # # ## random, uncertainty, uncertainty_uniform_discretize, dbal \
@@ -34,15 +34,17 @@ swa_epochs=5 #50
 
 log_iter=40
 
+code_dir=/home/asjchoi/TorchAL
+data_dir=$code_dir/data_indexes
 #Data arguments
-train_dir=/raid/shadab/prateek/cvpr_code/data/$dataset/train-$dataset/
-test_dir=/raid/shadab/prateek/cvpr_code/data/$dataset/test-$dataset/
-lSetPath=/raid/shadab/prateek/cvpr_code/data/$dataset/partition_$lSet_partition/lSet_$dataset.npy
-uSetPath=/raid/shadab/prateek/cvpr_code/data/$dataset/partition_$lSet_partition/uSet_$dataset.npy
-valSetPath=/raid/shadab/prateek/cvpr_code/data/$dataset/partition_$lSet_partition/valSet_$dataset.npy
+train_dir=$data_dir/$dataset/train-$dataset/
+test_dir=$data_dir/$dataset/test-$dataset/
+lSetPath=$data_dir/$dataset/partition_$lSet_partition/lSet_$dataset.npy
+uSetPath=$data_dir/$dataset/partition_$lSet_partition/uSet_$dataset.npy
+valSetPath=$data_dir/$dataset/partition_$lSet_partition/valSet_$dataset.npy
 
 #for lSet 1
-out_dir=/raid/shadab/prateek/cvpr_code/temp_results 
+out_dir=$code_dir/temp_results
 
 # for other lSet Exps
 # out_dir=/raid/shadab/prateek/cvpr_code/results_lSetPartitions
@@ -62,7 +64,7 @@ model_depth=16 #26
 
 date # So we know when we started
 
-export CUDA_VISIBLE_DEVICES=0,1
+export CUDA_VISIBLE_DEVICES=0
 
 $pythonExec tools/main_aml.py --n_GPU $num_GPU \
 --port $port --sampling_fn $sampling_fn --lSet_partition $lSet_partition \
